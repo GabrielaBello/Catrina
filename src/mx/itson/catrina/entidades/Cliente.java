@@ -5,7 +5,7 @@
 package mx.itson.catrina.entidades;
 
 /**
- *
+ *Atributos
  * @author gabrielaperezbello
  */
 public class Cliente {
