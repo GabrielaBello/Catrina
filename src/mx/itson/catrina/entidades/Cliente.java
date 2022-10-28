@@ -11,9 +11,9 @@ package mx.itson.catrina.entidades;
 public class Cliente {
     private String nombre;
     private String rfc;
-    private String direcccion;
-    private String ciudadEstado;
-    private String codigoPostal;
+    private String domicilio;
+    private String ciudad;
+    private String cp;
 
     public String getNombre() {
         return nombre;
@@ -32,26 +32,26 @@ public class Cliente {
     }
 
     public String getDirecccion() {
-        return direcccion;
+        return domicilio;
     }
 
     public void setDirecccion(String direcccion) {
-        this.direcccion = direcccion;
+        this.domicilio = direcccion;
     }
 
     public String getCiudadEstado() {
-        return ciudadEstado;
+        return ciudad;
     }
 
     public void setCiudadEstado(String ciudadEstado) {
-        this.ciudadEstado = ciudadEstado;
+        this.ciudad = ciudadEstado;
     }
 
     public String getCodigoPostal() {
-        return codigoPostal;
+        return cp;
     }
 
     public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
+        this.cp = codigoPostal;
     }
 }
