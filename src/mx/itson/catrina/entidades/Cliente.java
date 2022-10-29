@@ -31,27 +31,27 @@ public class Cliente {
         this.rfc = rfc;
     }
 
-    public String getDirecccion() {
+    public String getDomicilio() {
         return domicilio;
     }
 
-    public void setDirecccion(String direcccion) {
-        this.domicilio = direcccion;
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
     }
 
-    public String getCiudadEstado() {
+    public String getCiudad() {
         return ciudad;
     }
 
-    public void setCiudadEstado(String ciudadEstado) {
-        this.ciudad = ciudadEstado;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
-    public String getCodigoPostal() {
+    public String getCp() {
         return cp;
     }
 
-    public void setCodigoPostal(String codigoPostal) {
-        this.cp = codigoPostal;
+    public void setCp(String cp) {
+        this.cp = cp;
     }
 }
