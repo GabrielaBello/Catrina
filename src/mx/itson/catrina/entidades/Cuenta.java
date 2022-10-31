@@ -5,6 +5,7 @@
 package mx.itson.catrina.entidades;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +30,25 @@ public class Cuenta {
         }
         return cuenta;
     }
+    /**
+     * 
+     * @param mes
+     * @return 
+     */
+    public List<Movimiento> getMovimientosFiltrados(int mes){
+        List<Movimiento> movimientosFiltrados = new ArrayList<>();
+        this.movimientos.forEach(movimiento -> {
+            if(movimiento.getFecha().getMonth() == mes){
+                movimientosFiltrados.add(movimiento);
+                
+            }
+            
+        } );
+        movimientosFiltrados.sort((movimiento1, movimiento2) -> movimiento1.getFecha().compareTo( movimiento2.getFecha()));
+    
+        return movimientosFiltrados;
+    
+}
     /**
      * @return the producto
      */

@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -21,12 +23,36 @@ import mx.itson.catrina.enumerador.Tipo;
  * @author gabrielaperezbello
  */
 public class Main extends javax.swing.JFrame {
-
+    
+    Cuenta cuenta = null;
+    
+    
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+    }
+    
+    private void desplegarValoresTabla(List<Movimiento> movimientos){
+        Locale local = new Locale("es","MX");
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
+            
+        DateFormat formatoFecha = new SimpleDateFormat("dd/MMMM/yyyy");
+            
+        DefaultTableModel movimientosTabla = (DefaultTableModel)tblMovimientos.getModel();
+        movimientosTabla.setRowCount(0);
+            
+            for(Movimiento m: movimientos){
+                if(m.getTipo() == Tipo.DEPOSITO){
+                    movimientosTabla.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(m.getCantidad()), formatoMoneda.format(0), formatoMoneda.format(m.getSubtotal())});
+                    
+                }else if(m.getTipo() == Tipo.RETIRO){
+                    movimientosTabla.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(0), formatoMoneda.format(m.getCantidad()), formatoMoneda.format(m.getSubtotal())});
+                }
+              
+                
+            }
     }
 
     /**
@@ -604,6 +630,7 @@ public class Main extends javax.swing.JFrame {
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         
         try{
+            
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
             
@@ -614,7 +641,7 @@ public class Main extends javax.swing.JFrame {
             String contenido = new String(archivoBytes, StandardCharsets.UTF_8);
             
             //la clase que engloba todas las demas desearializada
-            Cuenta cuenta = new Cuenta().deserializar(contenido);
+            cuenta = new Cuenta().deserializar(contenido);
             
             lblNombre.setText(cuenta.getCliente().getNombre());
             lblRfc.setText(cuenta.getCliente().getRfc());
@@ -625,25 +652,7 @@ public class Main extends javax.swing.JFrame {
             lblClabe.setText(cuenta.getClabe());
             lblMoneda.setText(cuenta.getMoneda());
             
-            Locale local = new Locale("es","MX");
-            NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
-            
-            DateFormat formatoFecha = new SimpleDateFormat("dd/MMMM/yyyy");
-            
-            DefaultTableModel movimientos = (DefaultTableModel)tblMovimientos.getModel();
-            movimientos.setRowCount(0);
-            
-            for(Movimiento m: cuenta.getMovimientos()){
-                if(m.getTipo() == Tipo.DEPOSITO){
-                    movimientos.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(m.getCantidad()), formatoMoneda.format(0)});
-                    
-                }else if(m.getTipo() == Tipo.RETIRO){
-                    movimientos.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(0), formatoMoneda.format(m.getCantidad())});
-                }
-              
-                
-            }
-           
+            this.desplegarValoresTabla(cuenta.getMovimientos());
         }
         }catch(Exception ex){
             System.err.print("Ocurrió un error" + ex.getMessage());
@@ -652,7 +661,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void cbxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMesActionPerformed
-        // TODO add your handling code here:
+        int mes = cbxMes.getSelectedIndex();
+        List<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
+        
+        if(cuenta != null){
+            movimientosFiltrados = cuenta.getMovimientosFiltrados(mes);
+           
+            double saldoInicial = ResumenMovimiento.getSaldoInicial(cuenta.getMovimientos(), mes);
+            lblSaldoInicial.setText(String.valueOf(saldoInicial));
+            ResumenMovimiento.setSubtotal(movimientosFiltrados, saldoInicial);
+            
+            this.desplegarValoresTabla(movimientosFiltrados);
+            
+        }
+            
+              
     }//GEN-LAST:event_cbxMesActionPerformed
 
     /**

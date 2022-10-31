@@ -17,6 +17,24 @@ public class Movimiento {
     private String descripcion;
     private double cantidad;
     private Tipo tipo;
+    private double subtotal;
+
+    /**
+ * @return the subtotal
+     */
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    /**
+     * @param subtotal the subtotal to set
+     */
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+    
+    
+    
     
 
     /**

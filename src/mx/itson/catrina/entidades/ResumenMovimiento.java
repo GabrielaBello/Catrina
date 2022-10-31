@@ -4,16 +4,72 @@
  */
 package mx.itson.catrina.entidades;
 
+import java.util.List;
 import mx.itson.catrina.enumerador.Tipo;
 
 /**
  *
- * @author gabrielaperezbello
+ * @author Gabriela Pérez Bello
  */
 public class ResumenMovimiento {
-    //Saldo inicial
-    //Deposito
-    //Retiro
-    //Saldo Final
+    /**
+     * 
+     * @param movimientos
+     * @param mes
+     * @return 
+     */
+    public static double getSaldoInicial(List<Movimiento> movimientos, int mes){
+        double saldoInicial = 0;
+        
+        for(Movimiento movimiento : movimientos){
+            
+            if(movimiento.getFecha().getMonth() < mes && movimiento.getTipo() == Tipo.DEPOSITO){
+                saldoInicial += movimiento.getCantidad();
+                
+            }else if(movimiento.getFecha().getMonth() < mes && movimiento.getTipo() == Tipo.RETIRO){
+                saldoInicial -= movimiento.getCantidad();
+            }
+        }
+        
+        
+        return saldoInicial;
+        
+    }
     
+    public static void setSubtotal(List<Movimiento> movimientos, double saldoInicial){
+        double subTotal = saldoInicial;
+        double totalDepositos;
+        double totalRetiros;
+        for(Movimiento movimiento : movimientos){
+            if(movimiento.getTipo() == Tipo.DEPOSITO){
+                subTotal += movimiento.getCantidad();
+                
+            }else if(movimiento.getTipo() == Tipo.RETIRO){
+                subTotal -= movimiento.getCantidad();
+            }
+            
+            movimiento.setSubtotal(subTotal);
+            
+        }
+        
+    }
+    /**
+     * 
+     * @return 
+     */
+    public double getDepositos(){
+        
+        return 0;
+        
+    }
+    
+    public double getRetiros(){
+        
+        return 0;
+        
+    }
+    
+   
+    //Saldo Final
+    //
 }
