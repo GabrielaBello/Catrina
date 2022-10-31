@@ -19,10 +19,8 @@ public class Movimiento {
     private Date fecha;
     private String descripcion;
     private double cantidad;
-    //private List <Movimiento> movimiento;
     private Tipo tipo;
     
-    //String movimiento = cbxMes.get;
 
     /**
      * @return the fecha
