@@ -13,9 +13,6 @@ import mx.itson.catrina.enumerador.Tipo;
  * @author gabrielaperezbello
  */
 public class Movimiento {
-
-   
-    
     private Date fecha;
     private String descripcion;
     private double cantidad;

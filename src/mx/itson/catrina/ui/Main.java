@@ -103,6 +103,11 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Seleccione el mes:");
 
         cbxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cbxMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMesActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Seleccione el archivo a cargar:");
 
@@ -323,12 +328,11 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
                                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lblClabe, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -632,25 +636,24 @@ public class Main extends javax.swing.JFrame {
             for(Movimiento m: cuenta.getMovimientos()){
                 if(m.getTipo() == Tipo.DEPOSITO){
                     movimientos.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(m.getCantidad()), formatoMoneda.format(0)});
-                    //formatoMoneda.format(m.getCantidad()), formatoM
+                    
                 }else if(m.getTipo() == Tipo.RETIRO){
                     movimientos.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(0), formatoMoneda.format(m.getCantidad())});
                 }
               
                 
             }
-            //moneda
-            //for(Movimiento i: cuenta.getMovimientos()){
-               // if(i.getTipo() == Tipo.DEPOSITO){
-                   // model.addRow(new Object[] { formatoFecha.formar(i.getFecha()), i.getDescripcion())
-                //}
-            //}
+           
         }
         }catch(Exception ex){
             System.err.print("Ocurrió un error" + ex.getMessage());
         }
         
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void cbxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxMesActionPerformed
 
     /**
      * @param args the command line arguments

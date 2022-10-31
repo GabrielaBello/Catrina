@@ -10,7 +10,7 @@ import mx.itson.catrina.enumerador.Tipo;
  *
  * @author gabrielaperezbello
  */
-public class Resumen {
+public class ResumenMovimiento {
     //Saldo inicial
     //Deposito
     //Retiro
