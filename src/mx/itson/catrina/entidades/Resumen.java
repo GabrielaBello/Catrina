@@ -4,10 +4,16 @@
  */
 package mx.itson.catrina.entidades;
 
+import mx.itson.catrina.enumerador.Tipo;
+
 /**
  *
  * @author gabrielaperezbello
  */
 public class Resumen {
+    //Saldo inicial
+    //Deposito
+    //Retiro
+    //Saldo Final
     
 }

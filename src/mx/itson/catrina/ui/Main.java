@@ -7,10 +7,14 @@ package mx.itson.catrina.ui;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
 import mx.itson.catrina.entidades.*;
+import mx.itson.catrina.enumerador.Tipo;
 
 /**
  *
@@ -615,11 +619,32 @@ public class Main extends javax.swing.JFrame {
             lblCp.setText(cuenta.getCliente().getCp());
             lblCuenta.setText(cuenta.getCuenta());
             lblClabe.setText(cuenta.getClabe());
+            lblMoneda.setText(cuenta.getMoneda());
             
-            //Locale local = new Locale("es","MX");
-            //NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
+            Locale local = new Locale("es","MX");
+            NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
+            
+            DateFormat formatoFecha = new SimpleDateFormat("dd/MMMM/yyyy");
+            
+            DefaultTableModel movimientos = (DefaultTableModel)tblMovimientos.getModel();
+            movimientos.setRowCount(0);
+            
+            for(Movimiento m: cuenta.getMovimientos()){
+                if(m.getTipo() == Tipo.DEPOSITO){
+                    movimientos.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(m.getCantidad()), formatoMoneda.format(0)});
+                    //formatoMoneda.format(m.getCantidad()), formatoM
+                }else if(m.getTipo() == Tipo.RETIRO){
+                    movimientos.addRow(new Object[] {formatoFecha.format(m.getFecha()), m.getDescripcion(), formatoMoneda.format(0), formatoMoneda.format(m.getCantidad())});
+                }
+              
+                
+            }
             //moneda
-            
+            //for(Movimiento i: cuenta.getMovimientos()){
+               // if(i.getTipo() == Tipo.DEPOSITO){
+                   // model.addRow(new Object[] { formatoFecha.formar(i.getFecha()), i.getDescripcion())
+                //}
+            //}
         }
         }catch(Exception ex){
             System.err.print("Ocurrió un error" + ex.getMessage());
