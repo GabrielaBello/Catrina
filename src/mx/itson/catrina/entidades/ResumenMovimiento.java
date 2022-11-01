@@ -13,10 +13,10 @@ import mx.itson.catrina.enumerador.Tipo;
  */
 public class ResumenMovimiento {
     /**
-     * 
+     * Agrega al saldo incial los valores anteriores al mes seleccionado dependiento del tipo de movimiento.
      * @param movimientos
      * @param mes
-     * @return el saldo inicial a partir de una lista de movimientos y
+     * @return El saldo inicial.
      */
     public static double getSaldoInicial(List<Movimiento> movimientos, int mes){
         double saldoInicial = 0;
@@ -35,7 +35,11 @@ public class ResumenMovimiento {
         return saldoInicial;
         
     }
-    
+    /**
+     * Da valor a subtotal tomando el saldo inicial y dependiendo del tipo de movimiento suma o resta una cantidad.
+     * @param movimientos
+     * @param saldoInicial 
+     */
     public static void setSubtotal(List<Movimiento> movimientos, double saldoInicial){
         double subTotal = saldoInicial;
  
@@ -53,9 +57,9 @@ public class ResumenMovimiento {
         
     }
     /**
-     * 
+     * Obtiene todos los depositos y los guarda en una variable.
      * @param movimientos
-     * @return total de retiros a partir de una lista de movimientos.
+     * @return Total de depositos a partir de una lista de movimientos.
      */
     public static double getDepositos(List<Movimiento> movimientos){
         double totalDepositos = 0;
@@ -69,9 +73,9 @@ public class ResumenMovimiento {
         
     }
     /**
-     * 
+     * Obtiene todos los retiros y los guarda en una variable.
      * @param movimientos
-     * @return total de retiros a partir de una lista de movimientos.
+     * @return Total de retiros a partir de una lista de movimientos.
      */
     public static double getRetiros(List<Movimiento> movimientos){
         double totalRetiros = 0;
@@ -86,7 +90,14 @@ public class ResumenMovimiento {
         return totalRetiros;
         
     }
-     
+    /**
+     * Suma al saldo inicial los depositos y resta los retiros.
+     * @param movimientos
+     * @param saldoInicial
+     * @param totalDepositos
+     * @param totalRetiros
+     * @return Un saldo final
+     */
     public static double setSaldoFinal(List<Movimiento> movimientos, double saldoInicial, double totalDepositos, double totalRetiros){
         double saldoFinal = (saldoInicial + totalDepositos - totalRetiros);
         return saldoFinal;

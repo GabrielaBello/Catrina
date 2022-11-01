@@ -19,7 +19,7 @@ import mx.itson.catrina.entidades.*;
 import mx.itson.catrina.enumerador.Tipo;
 
 /**
- *
+ *Clase Main que contiene los valores que se agregan a la interfaz.
  * @author Gabriela Pérez Bello
  */
 public class Main extends javax.swing.JFrame {
