@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Atributos de una cuenta
+ *Atributos de una cuenta y método para filtrar movimientos.
  * @author Gabriela Pérez Bello
  */
 public class Cuenta {
@@ -31,7 +31,7 @@ public class Cuenta {
         return cuenta;
     }
     /**
-     * 
+     * Añade movimientos a mis movimientos filtrados a partir de la seleccion del mes.
      * @param mes
      * @return Los movimientos ya filtrados.
      */
@@ -40,9 +40,7 @@ public class Cuenta {
         for(Movimiento movimiento : movimientos){
             if(movimiento.getFecha().getMonth() == mes){
                 movimientosFiltrados.add(movimiento);
-                
             }
-            
         }
         movimientosFiltrados.sort((movimiento1, movimiento2) -> movimiento1.getFecha().compareTo( movimiento2.getFecha()));
     
