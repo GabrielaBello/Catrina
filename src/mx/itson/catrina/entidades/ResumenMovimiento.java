@@ -8,7 +8,7 @@ import java.util.List;
 import mx.itson.catrina.enumerador.Tipo;
 
 /**
- *
+ *Contiene métodos para realizar diversas operaciones.
  * @author Gabriela Pérez Bello
  */
 public class ResumenMovimiento {
@@ -16,7 +16,7 @@ public class ResumenMovimiento {
      * 
      * @param movimientos
      * @param mes
-     * @return 
+     * @return el saldo inicial a partir de una lista de movimientos y
      */
     public static double getSaldoInicial(List<Movimiento> movimientos, int mes){
         double saldoInicial = 0;
@@ -38,8 +38,7 @@ public class ResumenMovimiento {
     
     public static void setSubtotal(List<Movimiento> movimientos, double saldoInicial){
         double subTotal = saldoInicial;
-        double totalDepositos;
-        double totalRetiros;
+ 
         for(Movimiento movimiento : movimientos){
             if(movimiento.getTipo() == Tipo.DEPOSITO){
                 subTotal += movimiento.getCantidad();
@@ -55,21 +54,44 @@ public class ResumenMovimiento {
     }
     /**
      * 
-     * @return 
+     * @param movimientos
+     * @return total de retiros a partir de una lista de movimientos.
      */
-    public double getDepositos(){
-        
-        return 0;
+    public static double getDepositos(List<Movimiento> movimientos){
+        double totalDepositos = 0;
+        for(Movimiento movimiento : movimientos){
+            if(movimiento.getTipo() == Tipo.DEPOSITO){
+                totalDepositos += movimiento.getCantidad();
+                
+            }
+        }
+        return totalDepositos;
         
     }
-    
-    public double getRetiros(){
+    /**
+     * 
+     * @param movimientos
+     * @return total de retiros a partir de una lista de movimientos.
+     */
+    public static double getRetiros(List<Movimiento> movimientos){
+        double totalRetiros = 0;
+        for(Movimiento movimiento : movimientos){
+            if(movimiento.getTipo() == Tipo.RETIRO){
+                totalRetiros += movimiento.getCantidad();
+                
+            }
+            
+        }
         
-        return 0;
+        return totalRetiros;
         
     }
-    
-   
-    //Saldo Final
-    //
+     
+    public static double setSaldoFinal(List<Movimiento> movimientos, double saldoInicial, double totalDepositos, double totalRetiros){
+        double saldoFinal = (saldoInicial + totalDepositos - totalRetiros);
+        return saldoFinal;
+        
+        
+        
+    }
 }

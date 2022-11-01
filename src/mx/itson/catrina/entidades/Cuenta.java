@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Atributos de una cuenta y sus getters and setters.
+ *Atributos de una cuenta
  * @author Gabriela Pérez Bello
  */
 public class Cuenta {
@@ -33,17 +33,17 @@ public class Cuenta {
     /**
      * 
      * @param mes
-     * @return 
+     * @return Los movimientos ya filtrados.
      */
     public List<Movimiento> getMovimientosFiltrados(int mes){
         List<Movimiento> movimientosFiltrados = new ArrayList<>();
-        this.movimientos.forEach(movimiento -> {
+        for(Movimiento movimiento : movimientos){
             if(movimiento.getFecha().getMonth() == mes){
                 movimientosFiltrados.add(movimiento);
                 
             }
             
-        } );
+        }
         movimientosFiltrados.sort((movimiento1, movimiento2) -> movimiento1.getFecha().compareTo( movimiento2.getFecha()));
     
         return movimientosFiltrados;

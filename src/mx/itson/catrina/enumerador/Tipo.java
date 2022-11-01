@@ -7,8 +7,8 @@ package mx.itson.catrina.enumerador;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Enumerador 
- * @author gabrielaperezbello
+ * Enumerador sobre el tipo de movimiento bancario que se realiza.
+ * @author Gabriela Pérez Bello
  */
 public enum Tipo {
     @SerializedName("1")

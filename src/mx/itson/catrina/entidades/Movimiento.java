@@ -9,8 +9,8 @@ import java.util.List;
 import mx.itson.catrina.enumerador.Tipo;
 
 /**
- *
- * @author gabrielaperezbello
+ *Contiene los atributos de un movimiento.
+ * @author Gabriela Pérez Bello
  */
 public class Movimiento {
     private Date fecha;
@@ -33,10 +33,6 @@ public class Movimiento {
         this.subtotal = subtotal;
     }
     
-    
-    
-    
-
     /**
      * @return the fecha
      */

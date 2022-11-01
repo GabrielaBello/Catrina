@@ -20,7 +20,7 @@ import mx.itson.catrina.enumerador.Tipo;
 
 /**
  *
- * @author gabrielaperezbello
+ * @author Gabriela Pérez Bello
  */
 public class Main extends javax.swing.JFrame {
     
@@ -661,6 +661,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void cbxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMesActionPerformed
+        Locale local = new Locale("es","MX");
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
         int mes = cbxMes.getSelectedIndex();
         List<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
         
@@ -668,8 +670,19 @@ public class Main extends javax.swing.JFrame {
             movimientosFiltrados = cuenta.getMovimientosFiltrados(mes);
            
             double saldoInicial = ResumenMovimiento.getSaldoInicial(cuenta.getMovimientos(), mes);
-            lblSaldoInicial.setText(String.valueOf(saldoInicial));
+            lblSaldoInicial.setText(String.valueOf(formatoMoneda.format(saldoInicial)));
+            
             ResumenMovimiento.setSubtotal(movimientosFiltrados, saldoInicial);
+            
+            double totalDepositos = ResumenMovimiento.getDepositos(movimientosFiltrados);
+            lblDepositos.setText(formatoMoneda.format(totalDepositos));
+            
+            double totalRetiros = ResumenMovimiento.getRetiros(movimientosFiltrados);
+            lblRetiros.setText(formatoMoneda.format(totalRetiros));
+            
+            double saldoFinal = ResumenMovimiento.setSaldoFinal(movimientosFiltrados, saldoInicial, totalDepositos, totalRetiros);
+            lblSaldoFinal.setText(formatoMoneda.format(saldoFinal));
+            lblSaldoFinalP.setText(formatoMoneda.format(saldoFinal));
             
             this.desplegarValoresTabla(movimientosFiltrados);
             
